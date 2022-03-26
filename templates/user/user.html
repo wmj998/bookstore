@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li>User</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+        <div class="columns col-12">
+          <nav class="main-nav">
+            <ul>
+                <li><a href="/update/username" style="font-size: 20px">Username：{{ user.username }}</a></li>
+                <br>
+                <li><a href="/update/email" style="font-size: 20px">Email：{{ user.email }}</a></li>
+                <br>
+                <li><a style="font-size: 20px">Create：{{ user.create_time }}</a></li>
+                <br>
+                <li><a style="font-size: 20px">Update：{{ user.update_time }}</a></li>
+                <hr>
+                <li><a href="/update/password" style="font-size: 20px; color: teal">Change Password</a></li>
+                <br>
+                <li><a href="/delete" style="font-size: 20px; color: red">Delete Account</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <!-- end: main content -->
+
+{% endblock %}

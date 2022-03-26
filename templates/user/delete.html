@@ -1,0 +1,24 @@
+{% extends 'user/user.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/user">User</a></li>
+          <li>Delete</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <form class="form-example" action="/delete" method="post">
+        <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+        <div style="color: red">{{ error }}</div>
+        <input style="color: red" type="submit" value="Delete">
+    </form>
+    <br/>
+
+{% endblock %}

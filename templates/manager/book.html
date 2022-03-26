@@ -1,0 +1,125 @@
+{% extends 'manager/index.html' %}
+
+{% block header %}
+    <li class="header-search">
+      <a href="#" class="reveal-search">
+        <i class="fa fa-search"></i> Search
+      </a>
+      <div class="search-wrapper">
+        <form class="search-form" action="/manager/book/search" method="get">
+          <input type="text" name="keyword" placeholder="Search..." required>
+        </form>
+      </div>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/manager">Manager</a></li>
+          <li>Book</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+
+        <div class="columns col-12">
+          <table class="cart-table" cellspacing="0">
+          {% if res.items %}
+            <thead>
+              <tr>
+                <th class="product-thumbnail">&nbsp;</th>
+                <th class="product-description" colspan="1">Book</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Quantity</th>
+                <th class="product-total">State</th>
+              </tr>
+            </thead>
+          {% else %}
+              <h2 style="text-align: center">Here is empty</h2>
+          {% endif %}
+
+            <tbody>
+            <!-- start: cart item -->
+            {% for book in res.items %}
+                <tr class="cart-item">
+                  <td class="product-thumbnail"><img src="/static/{{ book.image }}"></td>
+                  <td class="product-description">
+                    <h3>
+                        <a href="/manager/book/name?id={{ book.id }}">{{ book.name}}</a>
+                    </h3>
+                    <a href="/manager/book/author?id={{ book.id }}">
+                        <strong>Author:</strong> {{ book.author }}
+                    </a>
+                    <p>
+                        <a href="/manager/book/description?id={{ book.id }}">{{ book.description }}</a>
+                    </p>
+                    <p>
+                      <strong>Create:</strong> {{ book.create_time }} &nbsp;&nbsp;
+                      <strong>Update:</strong> {{ book.update_time }}
+                    </p>
+                  </td>
+                  <td class="product-price">
+                      <a href="/manager/book/price?id={{ book.id }}">${{ book.price }}</a>
+                  </td>
+                  <td class="product-quantity">
+                      <a href="/manager/book/number?id={{ book.id }}">{{ book.number }}</a>
+                  </td>
+                  <td class="product-total">
+                      {% if book.state == 0 %}
+                          <a href="/manager/book/state?id={{ book.id }}" style="color: aqua">Wait</a>
+                      {% elif book.state == 1 %}
+                          <a href="/manager/book/state?id={{ book.id }}" style="color: green">Pass</a>
+                      {% elif book.state == 2 %}
+                          <a href="/manager/book/state?id={{ book.id }}" style="color: red">Fail</a>
+                      {% elif book.state == 3 %}
+                        <a href="/manager/book/state?id={{ book.id }}" style="color: aquamarine">Finish</a>
+                      {% elif book.state == 4 %}
+                        <a href="/manager/book/state?id={{ book.id }}" style="color: sienna">Delete</a>
+                      {% endif %}
+                  </td>
+                </tr>
+            {% endfor %}
+            <!-- end: cart item -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+    <!-- end: main content -->
+
+    {% if res.items %}
+    <!-- start: bottom pagination -->
+    <section class="product-pagination">
+      <div class="row max-inner">
+        <div class="columns col-12">
+          <ul class="paging-list">
+            {% if res.has_prev %}
+              <li><a href="?keyword={{ keyword }}&page={{ res.prev_num }}"><i class="fa fa-caret-left"></i></a></li>
+            {% else %}
+              <li><a href="#"><i class="fa fa-caret-left"></i></a></li>
+            {% endif %}
+            <li><a href="?keyword={{ keyword }}&page=1">First</a></li>
+            <li><a href="#" class="current-prod-page">{{ res.page }}</a></li>
+            <li><a href="?keyword={{ keyword }}&page={{ res.pages }}">Last</a></li>
+            {% if res.has_next %}
+              <li><a href="?keyword={{ keyword }}&page={{ res.next_num }}"><i class="fa fa-caret-right"></i></a></li>
+            {% else %}
+              <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- end: bottom pagination -->
+    {% endif %}
+
+{% endblock %}

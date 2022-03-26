@@ -1,0 +1,31 @@
+{% extends 'user/user.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/user">User</a></li>
+          <li>{{ info }}</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <form class="form-example" action="/update/{{ info }}" method="post">
+        {% if info == 'password' %}
+            <input type="password" name="value" placeholder="Old Password" required>
+            <input type="password" name="password" placeholder="New Password" required>
+        {% elif info == 'email' %}
+            <input type="email" name="value" placeholder="Email" required>
+        {% elif info == 'username' %}
+            <input type="text" name="value" placeholder="Username" autocomplete="off" required>
+        {% endif %}
+        <div style="color: red">{{ error }}</div>
+        <input type="submit" value="Save">
+    </form>
+    <br/>
+
+{% endblock %}

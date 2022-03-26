@@ -1,0 +1,86 @@
+{% extends 'manager/index.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/manager">Manager</a></li>
+          <li><a href="upload?page={{ page }}">Upload</a></li>
+          <li>Product</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+
+        <div class="columns col-5 product-media">
+          {% if book.state == 3 %}
+            <a><img src="/static/{{ book.image }}" /></a>
+          {% else %}
+            <a href="update?page={{ page }}&id={{ book.id }}"><img src="/static/{{ book.image }}" /></a>
+          {% endif %}
+        </div>
+
+        <div class="columns col-6 product-info float-right">
+          {% if book.state == 3 %}
+            <a>
+              <h2>Name: {{ book.name }}</h2>
+              <span class="product-meta">Author: {{ book.author }}</span>
+              <span class="product-meta">Number: {{ book.number }}</span>
+              <span class="product-price">${{ book.price }}</span>
+              <div class="row product-desc">
+                <p>{{ book.description }}</p>
+              </div>
+              {% if book.state==0 %}
+                <span class="grid-item-meta" style="color: aqua">State: Wait Check</span>
+              {% elif book.state==1 %}
+                <span class="grid-item-meta" style="color: green">State: Pass Check</span>
+              {% elif book.state==2 %}
+                <span class="grid-item-meta" style="color: red">State: Fail</span>
+              {% elif book.state==3 %}
+                <span class="grid-item-meta" style="color: aquamarine">State: Finish</span>
+              {% endif %}
+          </a>
+          {% else %}
+            <a href="update?page={{ page }}&id={{ book.id }}">
+              <h2>Name: {{ book.name }}</h2>
+              <span class="product-meta">Author: {{ book.author }}</span>
+              <span class="product-meta">Number: {{ book.number }}</span>
+              <span class="product-price">${{ book.price }}</span>
+              <div class="row product-desc">
+                <p>{{ book.description }}</p>
+              </div>
+              {% if book.state==0 %}
+                <span class="grid-item-meta" style="color: aqua">State: Wait Check</span>
+              {% elif book.state==1 %}
+                <span class="grid-item-meta" style="color: green">State: Pass Check</span>
+              {% elif book.state==2 %}
+                <span class="grid-item-meta" style="color: red">State: Fail</span>
+              {% elif book.state==3 %}
+                <span class="grid-item-meta" style="color: aquamarine">State: Finish</span>
+              {% endif %}
+          </a>
+          {% endif %}
+          <hr>
+          <div>
+              <button>
+                  <a href="delete?id={{ book.id }}">Delete</a>
+              </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {% if book.state==1 %}
+                  <button >
+                      <a href="finish?id={{ book.id }}">Finish</a>
+                  </button>
+              {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- end: main content -->
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'manager/index.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/manager">Manager</a></li>
+          <li><a href="upload?page={{ page }}">Upload</a></li>
+          <li><a href="product?page={{ page }}&id={{ id }}">Product</a></li>
+          <li>Update</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <form class="form-example" action="?id={{ id }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="text" name="name" placeholder="Name" autocomplete="off" required>
+        <input type="text" name="author" placeholder="Author" autocomplete="off" required>
+        <input type="text" name="number" placeholder="Number" autocomplete="off" oninput="value=value.replace(/[^\d]/g,'')">
+        <input type="text" name="price" placeholder="Price" autocomplete="off" oninput = "value=value.replace(/[^\d.]/g,'')" required>
+        <input type="text" name="date" placeholder="Date" autocomplete="off">
+        <input type="text" name="description" placeholder="Description" autocomplete="off">
+        <input type="submit" value="Save">
+    </form>
+    <br/>
+
+{% endblock %}

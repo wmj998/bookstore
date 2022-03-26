@@ -1,0 +1,35 @@
+{% extends "user/login.html" %}
+
+{% block body %}
+      <div class="signinform">
+        <h1>Forgot</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>Forgot</h2>
+                    <form action="forget" method="post">
+                        <div class="input-group">
+                            <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                            <input type="email" placeholder="Email" required="">
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fas fa-comment" aria-hidden="true"></i></span>
+                            <input type="text" placeholder="Verify" autocomplete="off" required="">
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                    </form>
+                    <p class="account">Already have an account? <a href="login">Login</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p>Copyright &copy; 2022 Book. All Rights Reserved.</p>
+        </div>
+        <!-- footer -->
+    </div>
+{% endblock %}

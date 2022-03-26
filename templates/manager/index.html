@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BOOK-STORE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize-and-boilerplate.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flexslider.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    <style type="text/css" >
+        form.form-example {
+            display: table;
+            margin: 0 auto;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- start: header -->
+    <header class="header">
+      <div class="row max-inner">
+        <div class="columns col-12">
+          <div class="logo">Book-Store</div>
+        </div>
+        <div class="columns col-12">
+          <ul class="header-controls">
+          {% block header %}
+          {% endblock %}
+            <li class="header-actions">
+              <a href="/manager/upload"><span class="fa fa-upload"></span> Upload</a>
+            </li>
+            <li class="header-actions">
+              <a href="/manager/check"><span class="fa fa-check"></span> Check</a>
+            </li>
+            <li class="header-actions">
+              <a href="/manager/book"><span class="fa fa-book"></span> Book</a>
+            </li>
+            <li class="header-actions">
+              <a href="/manager/user"><span class="fa fa-user"></span> User</a>
+            </li>
+            <li class="header-actions">
+              {% if session.id %}
+                <a href="/logout"><span class="fa fa-sign-out"></span> Log out</a>
+              {% else %}
+                <a href="/login"><span class="fa fa-sign-in"></span> Log in</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- end: header -->
+
+    {% block content %}
+        <div style="text-align: center;">
+          <h1 style="font-size: 50px; color: darkslategray">Welcome to Book Store !</h1>
+          <br>
+          <p style="font-size: 30px">This is the management center</p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    {% endblock %}
+
+    <!-- start: copyright -->
+    <section class="footer-copyright">
+      <div class="row max-inner">
+        <div class="columns col-7 col-centered">
+          <p>Copyright &copy; 2022 Book. All Rights Reserved.</p>
+        </div>
+      </div>
+    </section>
+    <!-- end: copyright -->
+
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery-1.11.0.min.js') }}"><\/script>')</script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='{{ url_for('static', filename='js/ga.js') }}';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
+</html>

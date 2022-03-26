@@ -1,0 +1,113 @@
+{% extends 'manager/index.html' %}
+
+{% block header %}
+    <li class="header-search">
+      <a href="#" class="reveal-search">
+        <i class="fa fa-search"></i> Search
+      </a>
+      <div class="search-wrapper">
+        <form class="search-form" action="/manager/user/search" method="get">
+          <input type="text" name="keyword" placeholder="Search..." required>
+        </form>
+      </div>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/manager">Manager</a></li>
+          <li>User</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+
+        <div class="columns col-12">
+          <table class="cart-table" cellspacing="0">
+          {% if res.items %}
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Create</th>
+                <th>Update</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+          {% else %}
+              <h2 style="text-align: center">Here is empty</h2>
+          {% endif %}
+
+            <tbody>
+            <!-- start: cart item -->
+            {% for user in res.items %}
+                <tr class="cart-item">
+                  <td>{{ user.id }}</td>
+                  <td>
+                      <a href="/manager/user/username?id={{ user.id }}">{{ user.username }}</a>
+                  </td>
+                  <td>
+                      <a href="/manager/user/email?id={{ user.id }}">{{ user.email }}</a>
+                  </td>
+                  <td>
+                      <a href="/manager/user/password?id={{ user.id }}">{{ '*' * 16 }}</a>
+                  </td>
+                  <td>{{ user.create_time }}</td>
+                  <td>{{ user.update_time }}</td>
+                  <td>
+                    {% if user.status == 0 %}
+                      <a href="/manager/user/status?id={{ user.id }}" style="color: red">Delete</a>
+                    {% elif user.status == 1 %}
+                      <a href="/manager/user/status?id={{ user.id }}" style="color: cyan">Normal</a>
+                    {% elif user.status == 2 %}
+                      <a href="/manager/user/status?id={{ user.id }}" style="color: blue">Manager</a>
+                    {% endif %}
+                  </td>
+                </tr>
+            {% endfor %}
+            <!-- end: cart item -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+    <!-- end: main content -->
+
+    {% if res.items %}
+    <!-- start: bottom pagination -->
+    <section class="product-pagination">
+      <div class="row max-inner">
+        <div class="columns col-12">
+          <ul class="paging-list">
+            {% if res.has_prev %}
+              <li><a href="?keyword={{ keyword }}&page={{ res.prev_num }}"><i class="fa fa-caret-left"></i></a></li>
+            {% else %}
+              <li><a href="#"><i class="fa fa-caret-left"></i></a></li>
+            {% endif %}
+            <li><a href="?keyword={{ keyword }}&page=1">First</a></li>
+            <li><a href="#" class="current-prod-page">{{ res.page }}</a></li>
+            <li><a href="?keyword={{ keyword }}&page={{ res.pages }}">Last</a></li>
+            {% if res.has_next %}
+              <li><a href="?keyword={{ keyword }}&page={{ res.next_num }}"><i class="fa fa-caret-right"></i></a></li>
+            {% else %}
+              <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- end: bottom pagination -->
+    {% endif %}
+
+{% endblock %}

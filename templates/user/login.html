@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BOOK-STORE</title>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-form.css') }}" type="text/css" media="all" />
+
+    <!-- fontawesome v5-->
+    <script src="{{ url_for('static', filename='js/fontawesome.js') }}"></script>
+</head>
+
+<body>
+{% block body %}
+    <div class="signinform">
+        <h1>Login</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>Login</h2>
+                    <form action="login" method="post">
+                        <div class="input-group">
+                            <span><i class="fas fa-user" aria-hidden="true"></i></span>
+                            <input type="text" name="account" placeholder="Username or Email" value="{{ account }}" required>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fas fa-key" aria-hidden="true"></i></span>
+                            <input type="password" id="password" name="password" placeholder="Password" value="{{ password }}" autocomplete="off" required>
+                            <span><i class="fas fa-low-vision" style="left: 100%" onclick="showhide()" id="eye"></i></span>
+                        </div>
+                        <div class="form-row bottom">
+                            <div class="form-check">
+                                <input type="checkbox" id="remember" name="remember" value="remember">
+                                <label for="remember">Remember me?</label>
+                            </div>
+                            <a href="forgot" class="forgot">Forgot password?</a>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Login</button>
+                    </form>
+                    <p class="account">Don't have an account? <a href="register">Register</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p style="color: red">{{ error }}</p>
+            <p>Copyright &copy; 2022 Book. All Rights Reserved.</p>
+        </div>
+        <!-- footer -->
+    </div>
+{% endblock %}
+
+    <script type="text/javascript">
+        var eye = document.getElementById("eye");
+        var pwd = document.getElementById("password");
+
+        function showhide(){
+            if (pwd.type == "password") {
+                pwd.type = "text";
+                eye.className='fa fa-eye'
+            }
+            else {
+                pwd.type = "password";
+                eye.className='fa fa-low-vision'
+            }
+        }
+    </script>
+</body>
+
+</html>

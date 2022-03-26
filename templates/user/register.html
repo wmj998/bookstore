@@ -1,0 +1,41 @@
+{% extends "user/login.html" %}
+
+{% block body %}
+      <div class="signinform">
+        <h1>Register</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>Register</h2>
+                    <form action="register" method="post">
+                        <div class="input-group">
+                            <span><i class="fas fa-user" aria-hidden="true"></i></span>
+                            <input type="text" name="username" placeholder="Username" value="{{ username }}" autocomplete="off" required>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                            <input type="email" name="email" placeholder="Email" value="{{ email }}" required>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fas fa-key" aria-hidden="true"></i></span>
+                            <input type="password" id="password" name="password" placeholder="Password" value="{{ password }}" autocomplete="off" required>
+                            <span><i class="fas fa-low-vision" style="left: 100%" onclick="showhide()" id="eye"></i></span>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Register</button>
+                    </form>
+                    <p class="account">Already have an account? <a href="login">Login</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p style="color: red">{{ error }}</p>
+            <p>Copyright &copy; 2022 Book. All Rights Reserved.</p>
+        </div>
+        <!-- footer -->
+      </div>
+{% endblock %}

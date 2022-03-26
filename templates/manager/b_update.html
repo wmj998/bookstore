@@ -1,0 +1,23 @@
+{% extends 'manager/index.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/manager">Manager</a></li>
+          <li><a href="/manager/book">Book</a></li>
+          <li>{{ info }}</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <form class="form-example" action="{{ info }}?id={{ id }}" method="post">
+        <input type="text" name="{{ info }}" placeholder="{{ info | capitalize   }}" autocomplete="off" required>
+        <input type="submit" value="Save">
+    </form>
+    <br>
+
+{% endblock %}

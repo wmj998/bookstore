@@ -1,0 +1,56 @@
+{% extends 'cart/index.html' %}
+
+{% block content %}
+
+    <!-- start: breadcrumbs -->
+    <section class="row breadcrumbs max-inner">
+      <div class="columns col-12">
+        <ul class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/cart">Cart</a></li>
+          <li>Detail</li>
+        </ul>
+      </div>
+    </section>
+    <!-- end: breadcrumbs -->
+
+    <!-- start: main content -->
+    <section class="main-content">
+      <div class="row max-inner">
+
+        <div class="columns col-5 product-media">
+          <a href="#"><img src="/static/{{ book.image }}" /></a>
+        </div>
+
+        <div class="columns col-6 product-info float-right">
+          <h2>Name: {{ book.name }}</h2>
+          <span class="product-meta">Author: {{ book.author }}</span>
+          <span class="product-meta">Number: {{ book.number }}</span>
+          <span class="product-price">${{ book.price }}</span>
+          <div class="row product-desc">
+            <p>
+              {{ book.description }}
+            </p>
+          </div>
+          <hr>
+
+          <h2>Sale</h2>
+          <div style="font-size: 20px">User: {{ book.user.username }}</div>
+          <div style="font-size: 20px">Email: {{ book.user.email }}</div>
+          <br>
+
+          <div class="row product-options">
+            <div class="columns col-6">
+              <a href="add?id={{ book.id }}">
+                <button type="submit" class="submit">
+                  <i class="fa fa-shopping-cart"></i>Add to cart
+                </button>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- end: main content -->
+{% endblock %}
